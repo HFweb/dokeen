@@ -19,6 +19,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
       name: product.name,
       price: product.price,
       image: product.images[0] ?? '',
+      size: 'Taille unique',
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);

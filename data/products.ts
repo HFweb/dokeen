@@ -13,6 +13,7 @@ export interface Product {
   features: string[];
   color: string;
   images: string[];
+  sizes: string[];
 }
 
 export const products: Product[] = [
@@ -40,6 +41,7 @@ export const products: Product[] = [
       'Coloris Triple Black exclusif',
       'Tailles disponibles : 36 → 47',
     ],
+    sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47'],
   },
   {
     id: '2',
@@ -60,6 +62,7 @@ export const products: Product[] = [
       'Coloris : Noir profond',
       'Label DK brodé discret',
     ],
+    sizes: ['Taille unique'],
   },
   {
     id: '3',
@@ -80,6 +83,7 @@ export const products: Product[] = [
       'Pack de 2 paires',
       'Motif DoKeen signature',
     ],
+    sizes: ['Taille unique'],
   },
 ];
 

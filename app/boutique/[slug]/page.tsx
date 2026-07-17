@@ -5,7 +5,7 @@ import { getProductBySlug, getRelatedProducts, formatPrice, products } from '@/d
 import Badge from '@/components/Badge';
 import ProductCard from '@/components/ProductCard';
 import ImageGallery from '@/components/ImageGallery';
-import AddToCartButton from '@/components/AddToCartButton';
+import ProductActions from '@/components/ProductActions';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -90,14 +90,8 @@ export default async function ProductPage({ params }: Props) {
           </ul>
 
           {/* CTA */}
-          <div className="flex flex-col gap-3 pt-4 border-t border-dk-gray-200">
-            <AddToCartButton product={product} />
-            <button
-              type="button"
-              className="w-full py-4 border border-dk-gray-200 text-dk-black font-semibold text-sm rounded-full hover:border-dk-gray-500 transition-colors"
-            >
-              Me prévenir du prochain drop
-            </button>
+          <div className="pt-4 border-t border-dk-gray-200">
+            <ProductActions product={product} />
           </div>
 
           {/* Delivery / returns */}

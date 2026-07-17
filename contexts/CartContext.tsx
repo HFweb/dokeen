@@ -1,27 +1,34 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { CartItem } from '@/lib/cart';
 import { getCart, saveCart } from '@/lib/cart';
 
 interface CartContextType {
   items: CartItem[];
   addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  removeItem: (compositeId: string) => void;
   count: number;
-  notification: string | null;
+  total: number;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 const CartContext = createContext<CartContextType>({
   items: [],
   addItem: () => {},
+  removeItem: () => {},
   count: 0,
-  notification: null,
+  total: 0,
+  isCartOpen: false,
+  openCart: () => {},
+  closeCart: () => {},
 });
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
-  const [notification, setNotification] = useState<string | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     setItems(getCart());
@@ -36,15 +43,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       saveCart(next);
       return next;
     });
-    setNotification(newItem.name);
-    clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setNotification(null), 3000);
+    setIsCartOpen(true);
   }, []);
 
+  const removeItem = useCallback((compositeId: string) => {
+    setItems((prev) => {
+      const next = prev.filter((i) => i.id !== compositeId);
+      saveCart(next);
+      return next;
+    });
+  }, []);
+
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
+
   const count = items.reduce((sum, i) => sum + i.quantity, 0);
+  const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, count, notification }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, count, total, isCartOpen, openCart, closeCart }}>
       {children}
     </CartContext.Provider>
   );

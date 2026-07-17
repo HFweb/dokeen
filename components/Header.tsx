@@ -15,7 +15,7 @@ const navLinks = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { count } = useCart();
+  const { count, openCart } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-dk-white/95 backdrop-blur-sm border-b border-dk-gray-200">
@@ -57,6 +57,7 @@ export default function Header() {
             {/* Cart icon */}
             <button
               type="button"
+              onClick={openCart}
               className="relative p-2 text-dk-gray-500 hover:text-dk-black transition-colors"
               aria-label={`Panier — ${count} article${count > 1 ? 's' : ''}`}
             >
@@ -83,6 +84,7 @@ export default function Header() {
             {/* Cart mobile */}
             <button
               type="button"
+              onClick={openCart}
               className="relative p-2 text-dk-gray-500"
               aria-label="Panier"
             >
