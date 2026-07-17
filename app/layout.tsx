@@ -3,6 +3,8 @@ import { Space_Grotesk, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CartNotification from '@/components/CartNotification';
+import { CartProvider } from '@/contexts/CartContext';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -32,26 +34,21 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     siteName: 'DoKeen',
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="fr"
-      className={`${spaceGrotesk.variable} ${inter.variable}`}
-    >
+    <html lang="fr" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartNotification />
+        </CartProvider>
       </body>
     </html>
   );

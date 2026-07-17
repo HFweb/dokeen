@@ -12,25 +12,32 @@ export interface Product {
   longDescription: string;
   features: string[];
   color: string;
+  images: string[];
 }
 
 export const products: Product[] = [
   {
     id: '1',
     slug: 'sneakers-tendance',
-    name: 'Sneakers tendance',
+    name: 'Air Max 1000 — Triple Black',
     price: 149.9,
     category: 'Sneakers',
     badge: 'Drop tendance',
     color: '#1A1A2E',
+    images: [
+      '/images/sneakers-1.jpg',
+      '/images/sneakers-2.jpg',
+      '/images/sneakers-3.jpg',
+      '/images/sneakers-poster.jpg',
+    ],
     shortDescription:
       'La sneaker du moment. Sélectionnée pour son style affûté, sa silhouette rare et son potentiel tendance.',
     longDescription:
       'Chaque saison, DoKeen choisit la sneaker qui définit la tendance. Ce modèle incarne parfaitement l\'équilibre entre le streetwear urbain et le premium discret. Construite pour durer, conçue pour se démarquer. Coloris exclusif, matières soignées, semelle signature. Un incontournable pour ceux qui savent.',
     features: [
-      'Tige en matière premium',
-      'Semelle ergonomique',
-      'Coloris exclusif DoKeen',
+      'Tige mesh premium respirante',
+      'Semelle Air Max visible — amorti optimal',
+      'Coloris Triple Black exclusif',
       'Tailles disponibles : 36 → 47',
     ],
   },
@@ -42,6 +49,7 @@ export const products: Product[] = [
     category: 'Accessoires',
     badge: 'Essential',
     color: '#0A0A0A',
+    images: [],
     shortDescription:
       'Le bonnet essentiel de la saison. Simple, propre, premium. L\'accessoire incontournable du daily.',
     longDescription:
@@ -61,6 +69,7 @@ export const products: Product[] = [
     category: 'Accessoires',
     badge: 'Essential',
     color: '#2A2A2A',
+    images: [],
     shortDescription:
       'Les chaussettes qui font la différence. Qualité premium, style street, confort au quotidien.',
     longDescription:

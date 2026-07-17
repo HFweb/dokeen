@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { products } from '@/data/products';
-import ProductCard from '@/components/ProductCard';
+import BoutiqueGrid from '@/components/BoutiqueGrid';
 
 export const metadata: Metadata = {
   title: 'Boutique',
@@ -25,32 +25,7 @@ export default function BoutiquePage() {
         </p>
       </div>
 
-      {/* Filter bar (visual only) */}
-      <div className="flex items-center gap-3 mb-12 flex-wrap">
-        {['Tous', 'Sneakers', 'Accessoires'].map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-              cat === 'Tous'
-                ? 'bg-dk-black text-dk-white border-dk-black'
-                : 'bg-transparent text-dk-gray-500 border-dk-gray-200 hover:border-dk-gray-500 hover:text-dk-black'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-        <span className="ml-auto text-dk-gray-500 text-sm hidden sm:block">
-          {products.length} produit{products.length > 1 ? 's' : ''}
-        </span>
-      </div>
-
-      {/* Products grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <BoutiqueGrid products={products} />
     </div>
   );
 }
